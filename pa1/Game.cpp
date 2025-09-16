@@ -215,21 +215,33 @@ void Game::displayAllCommands() const {
     Node<Command>* current = commands.getHead();
     int count = 1;
     
-    int maxIterations = 1000;
+    int maxIterations = commands.getSize() * 2; // Safe limit
     while (current && maxIterations-- > 0) {
-        const std::string& name = current->data.getName();
-        const std::string& desc = current->data.getDescription();
-        int pts = current->data.getPoints();
-        if (!name.empty() && !desc.empty()) {
-            std::cout << count << ". " << name << " - "
-                      << desc << " ("
-                      << pts << " points)" << std::endl;
+        // Add validation checks before accessing the data
+        if (&(current->data) != nullptr) {
+            const std::string& name = current->data.getName();
+            const std::string& desc = current->data.getDescription();
+            int pts = current->data.getPoints();
+            
+            // Validate the strings before using them
+            if (!name.empty() && !desc.empty() && pts > 0) {
+                std::cout << count << ". " << name << " - "
+                          << desc << " ("
+                          << pts << " points)" << std::endl;
+                count++;
+            } else {
+                std::cout << count << ". [INVALID COMMAND DATA]" << std::endl;
+                count++;
+            }
+        } else {
+            std::cout << count << ". [NULL COMMAND POINTER]" << std::endl;
             count++;
         }
         current = current->next;
     }
+    
     if (maxIterations <= 0) {
-        std::cout << "Error: Command list traversal exceeded safe limit. Possible data corruption." << std::endl;
+        std::cout << "Warning: Command list traversal exceeded safe limit." << std::endl;
     }
     
     if (count == 1) {
@@ -265,13 +277,22 @@ void Game::updateLeaderboard(const std::string& name, int score) {
         leaderboard.resize(10);
     }
 }
-Command* Game::getRandomCommandExcept(const Command* exclude) const {
+const Command* Game::getRandomCommandExcept(const Command* exclude) const {
     if (commands.getSize() <= 1) return nullptr;
     
-    Command* randomCmd = nullptr;
+    const Command* randomCmd = nullptr;
+    int tries = 0;
+    int maxTries = commands.getSize() * 2; // Reasonable limit
+    
     do {
         randomCmd = commands.getRandom();
+        tries++;
+        if (tries > maxTries) {
+            std::cerr << "Warning: Could not find unique random command" << std::endl;
+            return nullptr;
+        }
     } while (randomCmd == exclude);
     
     return randomCmd;
 }
+

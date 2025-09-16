@@ -1,4 +1,5 @@
 #pragma once
+#ifndef GAME_H
 #define GAME_H
 
 #include "LinkedList.hpp"
@@ -33,5 +34,7 @@ private:
     void saveAndExit();
     
     void updateLeaderboard(const std::string& name, int score);
-    Command* getRandomCommandExcept(const Command* exclude = nullptr) const;
+    const Command* getRandomCommandExcept(const Command* exclude = nullptr) const;
 };
+
+#endif

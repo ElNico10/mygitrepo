@@ -1,4 +1,4 @@
-#pragma once
+#ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
 #include "Command.hpp"
@@ -20,7 +20,10 @@ private:
 
 public:
     LinkedList();
+    LinkedList(const LinkedList<T>& other); // Copy constructor
     ~LinkedList();
+    
+    LinkedList<T>& operator=(const LinkedList<T>& other); // Assignment operator
     
     void insert(const T& data);
     bool remove(const T& data);
@@ -29,6 +32,8 @@ public:
     Node<T>* getHead() const;
     
     // Additional utility methods
-    T* getRandom() const;
+    const T* getRandom() const; // Changed to const T*
     void clear();
 };
+
+#endif

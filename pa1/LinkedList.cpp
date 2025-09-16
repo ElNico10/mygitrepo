@@ -1,9 +1,34 @@
 #include "LinkedList.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 template <typename T>
 LinkedList<T>::LinkedList() : head(nullptr), size(0) {}
+
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T>& other) : head(nullptr), size(0) {
+    // Deep copy
+    Node<T>* current = other.head;
+    while (current) {
+        insert(current->data);
+        current = current->next;
+    }
+}
+
+template <typename T>
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
+    if (this != &other) {
+        clear(); // Clear existing data
+        // Deep copy
+        Node<T>* current = other.head;
+        while (current) {
+            insert(current->data);
+            current = current->next;
+        }
+    }
+    return *this;
+}
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
@@ -76,7 +101,7 @@ Node<T>* LinkedList<T>::getHead() const {
 }
 
 template <typename T>
-T* LinkedList<T>::getRandom() const {
+const T* LinkedList<T>::getRandom() const {
     if (size == 0) return nullptr;
     
     int index = rand() % size;

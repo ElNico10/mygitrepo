@@ -16,6 +16,8 @@ LinkedList<Command> FileHandler::loadCommands(const std::string& filename) {
     
     std::string line;
     int lineNumber = 0;
+    int loadedCount = 0;
+    
     while (std::getline(file, line)) {
         lineNumber++;
         
@@ -30,12 +32,15 @@ LinkedList<Command> FileHandler::loadCommands(const std::string& filename) {
             std::cerr << "Warning: Invalid format on line " << lineNumber << ": " << line << std::endl;
             continue;
         }
+        
         std::string name = parts[0];
         std::string description = parts[1];
+        
         // Remove surrounding quotes from description if present
         if (description.size() >= 2 && description.front() == '"' && description.back() == '"') {
             description = description.substr(1, description.size() - 2);
         }
+        
         int points = 0;
         try {
             points = std::stoi(parts[2]);
@@ -43,15 +48,30 @@ LinkedList<Command> FileHandler::loadCommands(const std::string& filename) {
             std::cerr << "Warning: Invalid points value '" << parts[2] << "' on line " << lineNumber << std::endl;
             continue;
         }
-        if (name.empty() || description.empty() || points < 1) {
-            std::cerr << "Warning: Skipping invalid command on line " << lineNumber << std::endl;
-            continue;
+        
+        // Additional validation
+        if (name.empty()) {
+            std::cerr << "Warning: Empty name on line " << lineNumber << std::endl;
+            name = "unknown_command";
         }
+        
+        if (description.empty()) {
+            std::cerr << "Warning: Empty description on line " << lineNumber << std::endl;
+            description = "No description available";
+        }
+        
+        if (points < 1) {
+            std::cerr << "Warning: Invalid points (" << points << ") on line " << lineNumber << ", setting to 1" << std::endl;
+            points = 1;
+        }
+        
         Command cmd(name, description, points);
         commands.insert(cmd);
+        loadedCount++;
     }
     
     file.close();
+    std::cout << "Loaded " << loadedCount << " commands from " << filename << std::endl;
     return commands;
 }
 

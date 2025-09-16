@@ -1,4 +1,4 @@
-#pragma once
+#ifndef COMMAND_H
 #define COMMAND_H
 
 #include <string>
@@ -27,3 +27,5 @@ public:
     bool operator==(const Command& other) const;
     std::string toString() const;
 };
+
+#endif
