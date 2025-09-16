@@ -1,0 +1,30 @@
+ls,"Lists files and directories in the current folder",2
+cd,"Changes the current working directory",2
+pwd,"Prints the current working directory",2
+mkdir,"Creates a new directory",3
+rmdir,"Removes an empty directory",3
+cp,"Copies files or directories",3
+mv,"Moves or renames files or directories",3
+rm,"Removes files or directories",3
+touch,"Creates an empty file or updates timestamp",2
+cat,"Displays file contents",2
+more,"Views file contents one screen at a time",2
+less,"Views file contents with backward navigation",3
+head,"Shows first lines of a file",2
+tail,"Shows last lines of a file",2
+grep,"Searches for patterns in files",4
+find,"Searches for files and directories",4
+chmod,"Changes file permissions",5
+chown,"Changes file ownership",5
+ps,"Displays information about running processes",4
+top,"Displays real-time system information",4
+kill,"Terminates processes by PID",4
+tar,"Archives files",5
+gzip,"Compresses files",4
+ssh,"Secure shell remote login",5
+scp,"Secure copy between hosts",5
+df,"Shows disk space usage",3
+du,"Shows directory space usage",3
+wc,"Counts words, lines, and characters",2
+man,"Displays manual pages",2
+sudo,"Executes commands as superuser",5
