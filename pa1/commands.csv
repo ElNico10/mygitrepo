@@ -27,3 +27,4 @@ df,"Shows disk space usage",3
 du,"Shows directory space usage",3
 wc,"Counts words, lines, and characters",2
 man,"Displays manual pages",2
+sudo,"Executes commands as superuser",5

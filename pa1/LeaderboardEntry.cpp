@@ -12,5 +12,5 @@ void LeaderboardEntry::setName(const std::string& name) { this->name = name; }
 void LeaderboardEntry::setScore(int score) { this->score = score; }
 
 bool LeaderboardEntry::operator<(const LeaderboardEntry& other) const {
-    return score > other.score; // Descending order (higher scores first)
+    return score > other.score;
 }

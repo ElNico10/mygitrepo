@@ -21,7 +21,6 @@ LinkedList<Command> FileHandler::loadCommands(const std::string& filename) {
     while (std::getline(file, line)) {
         lineNumber++;
         
-        // Trim whitespace
         line.erase(0, line.find_first_not_of(" \t\r\n"));
         line.erase(line.find_last_not_of(" \t\r\n") + 1);
         
@@ -36,7 +35,6 @@ LinkedList<Command> FileHandler::loadCommands(const std::string& filename) {
         std::string name = parts[0];
         std::string description = parts[1];
         
-        // Remove surrounding quotes from description if present
         if (description.size() >= 2 && description.front() == '"' && description.back() == '"') {
             description = description.substr(1, description.size() - 2);
         }
@@ -49,7 +47,6 @@ LinkedList<Command> FileHandler::loadCommands(const std::string& filename) {
             continue;
         }
         
-        // Additional validation
         if (name.empty()) {
             std::cerr << "Warning: Empty name on line " << lineNumber << std::endl;
             name = "unknown_command";
@@ -104,7 +101,6 @@ std::vector<LeaderboardEntry> FileHandler::loadLeaderboard(const std::string& fi
     
     std::string line;
     while (std::getline(file, line)) {
-        // Trim whitespace
         line.erase(0, line.find_first_not_of(" \t\r\n"));
         line.erase(line.find_last_not_of(" \t\r\n") + 1);
         
@@ -115,7 +111,6 @@ std::vector<LeaderboardEntry> FileHandler::loadLeaderboard(const std::string& fi
             std::string name = line.substr(0, commaPos);
             std::string scoreStr = line.substr(commaPos + 1);
             
-            // Trim whitespace from name and score
             name.erase(0, name.find_first_not_of(" \t"));
             name.erase(name.find_last_not_of(" \t") + 1);
             scoreStr.erase(0, scoreStr.find_first_not_of(" \t"));
@@ -167,7 +162,6 @@ std::vector<std::string> FileHandler::parseCSVLine(const std::string& line) {
         }
     }
     fields.push_back(field);
-    // Only accept lines with exactly 3 fields
     if (fields.size() != 3) fields.clear();
     return fields;
 }

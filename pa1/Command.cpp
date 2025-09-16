@@ -6,7 +6,6 @@ Command::Command() : name(""), description(""), points(0) {}
 Command::Command(const std::string& name, const std::string& description, int points)
     : name(name), description(description), points(points) 
 {
-    // Add validation - but do it safely without modifying const references
     if (this->name.empty()) {
         this->name = "unknown";
     }

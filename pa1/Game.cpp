@@ -215,15 +215,13 @@ void Game::displayAllCommands() const {
     Node<Command>* current = commands.getHead();
     int count = 1;
     
-    int maxIterations = commands.getSize() * 2; // Safe limit
+    int maxIterations = commands.getSize() * 2;
     while (current && maxIterations-- > 0) {
-        // Add validation checks before accessing the data
         if (&(current->data) != nullptr) {
             const std::string& name = current->data.getName();
             const std::string& desc = current->data.getDescription();
             int pts = current->data.getPoints();
             
-            // Validate the strings before using them
             if (!name.empty() && !desc.empty() && pts > 0) {
                 std::cout << count << ". " << name << " - "
                           << desc << " ("
@@ -272,7 +270,6 @@ void Game::updateLeaderboard(const std::string& name, int score) {
     leaderboard.emplace_back(name, score);
     std::sort(leaderboard.begin(), leaderboard.end());
     
-    // Keep only top 10 scores to prevent file from growing too large
     if (leaderboard.size() > 10) {
         leaderboard.resize(10);
     }
@@ -282,7 +279,7 @@ const Command* Game::getRandomCommandExcept(const Command* exclude) const {
     
     const Command* randomCmd = nullptr;
     int tries = 0;
-    int maxTries = commands.getSize() * 2; // Reasonable limit
+    int maxTries = commands.getSize() * 2;
     
     do {
         randomCmd = commands.getRandom();

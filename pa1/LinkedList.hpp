@@ -20,10 +20,10 @@ private:
 
 public:
     LinkedList();
-    LinkedList(const LinkedList<T>& other); // Copy constructor
+    LinkedList(const LinkedList<T>& other);
     ~LinkedList();
     
-    LinkedList<T>& operator=(const LinkedList<T>& other); // Assignment operator
+    LinkedList<T>& operator=(const LinkedList<T>& other);
     
     void insert(const T& data);
     bool remove(const T& data);
@@ -31,8 +31,7 @@ public:
     int getSize() const;
     Node<T>* getHead() const;
     
-    // Additional utility methods
-    const T* getRandom() const; // Changed to const T*
+    const T* getRandom() const;
     void clear();
 };
 

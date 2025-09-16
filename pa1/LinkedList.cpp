@@ -8,7 +8,6 @@ LinkedList<T>::LinkedList() : head(nullptr), size(0) {}
 
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) : head(nullptr), size(0) {
-    // Deep copy
     Node<T>* current = other.head;
     while (current) {
         insert(current->data);
@@ -19,8 +18,7 @@ LinkedList<T>::LinkedList(const LinkedList<T>& other) : head(nullptr), size(0) {
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
     if (this != &other) {
-        clear(); // Clear existing data
-        // Deep copy
+        clear();
         Node<T>* current = other.head;
         while (current) {
             insert(current->data);
@@ -123,5 +121,4 @@ void LinkedList<T>::clear() {
     size = 0;
 }
 
-// Explicit template instantiation
 template class LinkedList<Command>;
