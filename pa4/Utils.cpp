@@ -36,6 +36,45 @@ namespace Utils
         return parts;
     }
 
+    // Parse a single CSV line, honoring double quotes which may contain commas
+    vector<string> ParseCSVLine(const string &line)
+    {
+        vector<string> fields;
+        string cur;
+        bool inQuotes = false;
+
+        for (size_t i = 0; i < line.size(); ++i)
+        {
+            char c = line[i];
+            if (c == '"')
+            {
+                // toggle inQuotes, but handle escaped " by looking ahead
+                if (inQuotes && i + 1 < line.size() && line[i+1] == '"')
+                {
+                    cur.push_back('"');
+                    ++i; // skip escaped quote
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (c == ',' && !inQuotes)
+            {
+                fields.push_back(Trim(cur));
+                cur.clear();
+            }
+            else
+            {
+                cur.push_back(c);
+            }
+        }
+
+        // push last field
+        fields.push_back(Trim(cur));
+        return fields;
+    }
+
     int ToIntSafe(const string &s)
     {
         try

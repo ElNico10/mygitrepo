@@ -2,16 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "Debug pa4 (make then run)",
       "type": "cppdbg",
       "request": "launch",
+      "preLaunchTask": "make-pa4",
+      "program": "${workspaceFolder}/pa4",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/nicho/OneDrive/Documents/GitHub/mygitrepo/pa4",
-      "program": "c:/Users/nicho/OneDrive/Documents/GitHub/mygitrepo/pa4/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}",
+  "externalConsole": false,
+  "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

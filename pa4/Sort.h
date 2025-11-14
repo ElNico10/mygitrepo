@@ -84,7 +84,7 @@ namespace Sort
     template <typename T, typename Compare>
     void QuickSortHelper(vector<T> &arr, int low, int high, Compare comp)
     {
-        if (low < high)
+        if (low < high) 
         {
             int pi = Partition(arr, low, high, comp);
             QuickSortHelper(arr, low, pi - 1, comp);

@@ -5,14 +5,12 @@
 #include <functional>
 #include "MovieDatabase.h"
 #include "Sort.h"
+#include "Config.h"
 #include "Tests.h"
 
 using namespace std;
 
-// Global sorting algorithm selector
-// 1 = merge sort
-// 2 = quicksort
-extern const int SORTING_ALGORITHM = 1;
+// Sorting algorithm is configured in Config.h
 
 MovieDatabase globalDB;
 
@@ -85,7 +83,7 @@ void executeFindByGenre(const vector<string> &tokens)
     else if (sortField == "runtime")
     {
         comp = [&](const Movie &a, const Movie &b) {
-            return ascending ? a.GetRuntimeMinutes() < b.GetRuntimeMinutes()
+            return ascending ? a.GetRuntimeMinutes() < b.GetRuntimeMinutes() 
                              : a.GetRuntimeMinutes() > b.GetRuntimeMinutes();
         };
     }
@@ -188,7 +186,7 @@ int main()
     string input;
     while (true)
     {
-        cout << "PA4> ";
+        cout << "\nPA4> ";
         getline(cin, input);
 
         if (input == ":quit")

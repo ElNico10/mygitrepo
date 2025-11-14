@@ -6,7 +6,7 @@
 #include <sstream>
 #include <iostream>
 
-extern const int SORTING_ALGORITHM;
+#include "Config.h"
 
 MovieDatabase::MovieDatabase() {}
 
@@ -24,23 +24,22 @@ void MovieDatabase::LoadFromCSV(const string &filename)
 
     while (getline(file, line))
     {
-        stringstream ss(line);
-        vector<string> columns;
-        string temp;
+        vector<string> columns = Utils::ParseCSVLine(line);
 
-        while (getline(ss, temp, ','))
-            columns.push_back(Utils::Trim(temp));
-
+        // Expecting header order like in imdb_top_1000.csv:
+        // 0: Poster_Link, 1: Series_Title, 2: Released_Year, 3: Certificate,
+        // 4: Runtime, 5: Genre, 6: IMDB_Rating, ...
         if (columns.size() < 7)
             continue;
 
         string title = columns[1];
-        string certificate = columns[2];
-        string genreRaw = columns[3];
+        string certificate = columns[3];
+        string runtimeRaw = columns[4];
+        string genreRaw = columns[5];
         vector<string> genres = Utils::Split(genreRaw, ',');
-        int year = Utils::ToIntSafe(columns[4]);
-        double rating = Utils::ToDoubleSafe(columns[5]);
-        int runtime = Utils::ParseRuntime(columns[6]);
+        int year = Utils::ToIntSafe(columns[2]);
+        double rating = Utils::ToDoubleSafe(columns[6]);
+        int runtime = Utils::ParseRuntime(runtimeRaw);
 
         Movie movie(title, certificate, genreRaw, genres, year, rating, runtime);
 
