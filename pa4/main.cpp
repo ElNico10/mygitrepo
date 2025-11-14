@@ -12,7 +12,7 @@ using namespace std;
 // Global sorting algorithm selector
 // 1 = merge sort
 // 2 = quicksort
-const int SORTING_ALGORITHM = 1;
+extern const int SORTING_ALGORITHM = 1;
 
 MovieDatabase globalDB;
 
@@ -113,7 +113,20 @@ void executeTopRated(const vector<string> &tokens)
     }
 
     string genre = tokens[1];
-    int count = stoi(tokens[2]);
+    int tmpCount = 0;
+    try {
+        tmpCount = stoi(tokens[2]);
+    } catch (...) {
+        cout << "Error: count must be a number\n";
+        return;
+    }
+
+    if (tmpCount < 0) {
+        cout << "Error: count must be non-negative\n";
+        return;
+    }
+
+    size_t count = static_cast<size_t>(tmpCount);
     string order = tokens[3];
 
     if (!globalDB.GenreExists(genre))
@@ -139,7 +152,7 @@ void executeTopRated(const vector<string> &tokens)
     if (count > results.size())
         count = results.size();
 
-    for (int i = 0; i < count; i++)
+    for (size_t i = 0; i < count; i++)
         results[i].Print();
 }
 

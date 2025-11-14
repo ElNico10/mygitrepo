@@ -1,6 +1,7 @@
 #include "MovieDatabase.h"
 #include "Utils.h"
 #include "Sort.h"
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -63,7 +64,7 @@ vector<Movie> MovieDatabase::FindByGenre(const string &genre) const
     return moviesByGenre.at(genre);
 }
 
-vector<Movie> MovieDatabase::TopRatedByGenre(const string &genre, int count) const
+vector<Movie> MovieDatabase::TopRatedByGenre(const string &genre, size_t count) const
 {
     if (!GenreExists(genre))
         return {};

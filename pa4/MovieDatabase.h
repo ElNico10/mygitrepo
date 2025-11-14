@@ -18,7 +18,7 @@ public:
     void LoadFromCSV(const string &filename);
 
     vector<Movie> FindByGenre(const string &genre) const;
-    vector<Movie> TopRatedByGenre(const string &genre, int count) const;
+    vector<Movie> TopRatedByGenre(const string &genre, size_t count) const;
 
     bool DeleteByTitle(const string &title);
     bool GenreExists(const string &genre) const;
