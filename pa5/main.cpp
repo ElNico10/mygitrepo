@@ -1,3 +1,4 @@
+// main.cpp
 /*
  * PA5: Micro Project - Emergency Management System
  * CPTS 223 Advanced Data Structures
@@ -16,19 +17,14 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "Graph.h"
+#include "Hospital.h"
+#include "EmergencySystem.h"
 
 using namespace std;
 
-// TODO: Include your header files here
-// #include "Graph.h"
-// #include "PriorityQueue.h"
-// #include "Hospital.h"
-
-// TODO: Define your global data structures here
-// - Graph representing the hospital network
-// - Container for hospitals (each with its priority queue)
-// - Any other necessary data structures
-
+// Global emergency system instance
+EmergencySystem emergencySystem;
 
 /*
  * Initialize the hospital network graph with the 5 cities and their connections.
@@ -44,11 +40,7 @@ using namespace std;
  * - Colfax <-> Spokane: 50 miles
  */
 void initializeNetwork() {
-    // TODO: Initialize your graph with cities and edges
-    // TODO: Initialize all hospitals as OPEN
-    // TODO: If pre-computing shortest paths, do it here using your MA3 Dijkstra's implementation
-    
-    cout << "Hospital network initialized." << endl;
+    emergencySystem.initialize();
 }
 
 
@@ -61,17 +53,7 @@ void initializeNetwork() {
  * @param city - City where emergency occurred
  */
 void handleEmergency(const string& name, int severity, const string& city) {
-    // TODO: Find the nearest OPEN hospital to the given city
-    // - If the city's hospital is open, use it
-    // - If closed, use Dijkstra's (or pre-computed distances) to find nearest open hospital
-    
-    // TODO: Add patient to the hospital's priority queue
-    // - Patient should include: name, severity, original city
-    
-    // TODO: Print confirmation message
-    // Example: "Patient John Doe (severity 8) from Pullman admitted to Moscow hospital."
-    
-    cout << "TODO: Implement emergency command" << endl;
+    emergencySystem.handleEmergency(name, severity, city);
 }
 
 
@@ -82,16 +64,7 @@ void handleEmergency(const string& name, int severity, const string& city) {
  * @param city - City whose hospital to close
  */
 void handleHospitalClose(const string& city) {
-    // TODO: Mark the hospital as CLOSED
-    
-    // TODO: If hospital has patients, transfer them to nearest open hospital
-    // - Find nearest open hospital using Dijkstra's or pre-computed distances
-    // - Merge the priority queues (this is where efficient merge is important!)
-    
-    // TODO: Print confirmation message
-    // Example: "Pullman hospital closed. 3 patients transferred to Moscow hospital."
-    
-    cout << "TODO: Implement hospital close command" << endl;
+    emergencySystem.handleHospitalClose(city);
 }
 
 
@@ -102,12 +75,7 @@ void handleHospitalClose(const string& city) {
  * @param city - City whose hospital to reopen
  */
 void handleHospitalOpen(const string& city) {
-    // TODO: Mark the hospital as OPEN
-    
-    // TODO: Print confirmation message
-    // Example: "Pullman hospital is now open."
-    
-    cout << "TODO: Implement hospital open command" << endl;
+    emergencySystem.handleHospitalOpen(city);
 }
 
 
@@ -118,16 +86,7 @@ void handleHospitalOpen(const string& city) {
  * @param city - City whose hospital should treat next patient
  */
 void handleTreat(const string& city) {
-    // TODO: Check if hospital is open
-    
-    // TODO: Extract highest priority patient from the queue (extractMax)
-    
-    // TODO: Print patient information
-    // Example: "Treating Alice Smith (severity 9) originally from Pullman at Moscow hospital."
-    
-    // TODO: Handle edge cases (hospital closed, no patients)
-    
-    cout << "TODO: Implement treat command" << endl;
+    emergencySystem.handleTreat(city);
 }
 
 
@@ -142,21 +101,7 @@ void handleTreat(const string& city) {
  * - Next patient info (if any): name, severity, original city
  */
 void handleStatus() {
-    // TODO: Loop through all hospitals
-    
-    // TODO: For each hospital, display:
-    // - Hospital name/city
-    // - Status (OPEN or CLOSED)
-    // - Number of patients waiting
-    // - If patients waiting, show next patient (highest priority)
-    
-    // Example output format:
-    // Hospital: Pullman, WA
-    // Status: OPEN
-    // Patients Waiting: 2
-    // Next Patient: Alice Smith, Severity: 9, From: Pullman
-    
-    cout << "TODO: Implement status command" << endl;
+    emergencySystem.handleStatus();
 }
 
 
