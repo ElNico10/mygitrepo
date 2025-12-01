@@ -1,0 +1,39 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build emergency_system",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Builds the emergency_system executable using Makefile"
+        },
+        {
+            "type": "shell",
+            "label": "Run emergency_system",
+            "command": "${workspaceFolder}/emergency_system",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "Build emergency_system",
+            "group": {
+                "kind": "test"
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "detail": "Runs the emergency_system executable"
+        }
+    ],
+    "version": "2.0.0"
+}
